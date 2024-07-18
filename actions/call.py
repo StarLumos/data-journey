@@ -5,7 +5,13 @@ def recipient() -> str | None:
     global person
 
     print("\nWho would you like to call? \n 1. Doctor Strange \n 2. Shang-Chi \n 3. Captain Marvel")
-    choice = int(input("\nEnter your choice: "))
+    choice = input("\nEnter your choice: ")
+
+    if not choice.isdigit():
+        print("Sorry, that isn't an option. Please try again.")
+        return recipient()
+    choice = int(choice)
+
     if choice == 1:
         person = "Doctor Strange"
         return

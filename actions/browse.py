@@ -5,7 +5,13 @@ def website() -> str | None:
     global site
 
     print("\nWhich website would you like to visit? \n 1. Gmail \n 2. YouTube \n 3. Spotify")
-    choice = int(input("\nEnter your choice: "))
+    choice = input("\nEnter your choice: ")
+
+    if not choice.isdigit():
+        print("Sorry, that isn't an option. Please try again.")
+        website()
+    choice = int(choice)
+
     if choice == 1:
         site = "Gmail"
     elif choice == 2:
