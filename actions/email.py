@@ -16,7 +16,7 @@ def email():
         "data reception -- the mail server is processing the frames, processes the packets, and reassembles the data packets",
         "data handling -- the email is being stored on the mail server",
         "display"
-        ]
+    ]
     
     for i in range(len(phases)):
         start("Entering phase " + i + phases[i])
