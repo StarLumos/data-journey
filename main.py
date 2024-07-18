@@ -6,17 +6,17 @@ def choice():
     print("\nWhat would you like to do? \n 1. Send an email \n 2. Dial a call \n 3. Visit a website")
     initial = input("\nEnter the corresponding number: ")
 
-    if initial.isdigit():
-        initial = int(initial)
-        if initial == 1:
-            email()
-        elif initial == 2:
-            call()
-        elif initial == 3:
-            browse()
-        else:
-            print("Sorry, that isn't an option. Please try again.")
-            choice()
+    if not initial.isdigit():
+        print("Sorry, that isn't an option. Please try again.")
+        return choice()
+    initial = int(initial)
+     
+    if initial == 1:
+        email()
+    elif initial == 2:
+        call()
+    elif initial == 3:
+        browse()
     else:
         print("Sorry, that isn't an option. Please try again.")
         choice()
