@@ -26,13 +26,7 @@ def email():
             step("Reassembling the data")
             step("Displaying email")
 
-    for i in range(len(phases)):
-        start("Entering phase " + str(i) + phases[i])
-
-        if phases[i] == "display":
-            step("Retrieving email from the server")
-            step("Reassembling the data")
-            step("Displaying email")
+        completion(i)
 
     print("\nThe recipient has now received this message:")
     print(message)
