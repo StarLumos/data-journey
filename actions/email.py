@@ -21,7 +21,7 @@ def email():
     for i in range(len(phases)):
         start("Entering phase " + str(i) + phases[i])
 
-        if phases[i] == "display":
+        if i == 9:
             step("Retrieving email from the server")
             step("Reassembling the data")
             step("Displaying email")
