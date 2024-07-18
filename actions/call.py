@@ -22,38 +22,38 @@ def recipient() -> str | None:
 def call():
     recipient()
 
-    start("Entering phase 1: call intiation")
-    step("Generating a call setup request")
-    completion(1)
+    phases = [
+        "call initiation",
+        "signal trasmission to cell tower",
+        "cell tower processing",
+        "MSC handling",
+        "signal transmission to recipient's cell tower -- the recipient's MSC is routing the call setup request to the appropriate cell tower",
+        "signal transmission to recipient's phone -- the cell tower transforms the digital setup request into radio frequency (RF) signals",
+        "call notification"
+    ]
 
-    start("Entering phase 2: signal trasmission to cell tower")
-    step("Converting the call setup request into radio frequency (RF) signals")
-    step("Transmitting to the nearest cell tower")
-    completion(2)
+    for i in range(len(phases)):
+        start("Entering phase " + str(i) + phases[i])
 
-    start("Entering phase 3: cell tower processing")
-    step("Nearest cell tower receiving RF signals and converting them into digital data")
-    step("Forwaring the call setup request to the nearest mobile switching center (MSC)")
-    completion(3)
+        if i == 1:
+            step("Generating a call setup request")
+        elif i == 2:
+            step("Converting the call setup request into radio frequency (RF) signals")
+            step("Transmitting to the nearest cell tower")
+        elif i == 3:
+            step("Nearest cell tower receiving RF signals and converting them into digital data")
+            step("Forwaring the call setup request to the nearest mobile switching center (MSC)")
+        elif i == 4:
+            step("MSC processing the call request")
+            step("Identifying the destination number")
+            step("Determining the best route to the recipient's phone")
+            step("MSC sending a setup request to the recipient's nearest MSC to identify the nearest cell tower to them")
+        elif i == 7:
+            step("Recipient's phone receiving the RF signals")
+            step("Converting back to digital data")
+            step("Triggering the ringtone to notify the recipient of the incoming call")
 
-    start ("Entering phase 4: MSC handling")
-    step("MSC processing the call request")
-    step("Identifying the destination number")
-    step("Determining the best route to the recipient's phone")
-    step("MSC sending a setup request to the recipient's nearest MSC to identify the nearest cell tower to them")
-    completion(4)
-
-    start("Entering phase 5: signal transmission to recipient's cell tower -- the recipient's MSC is routing the call setup request to the appropriate cell tower")
-    completion(5)
-
-    start("Entering phase 6: signal transmission to recipient's phone -- the cell tower transforms the digital setup request into radio frequency (RF) signals")
-    completion(6)
-
-    start("Entering phase 7: call notification")
-    step("Recipient's phone receiving the RF signals")
-    step("Converting back to digital data")
-    step("Triggering the ringtone to notify the recipient of the incoming call")
-    completion(7)
+        completion(i)
 
     print("\nNow calling " + person)
     time.sleep(1)
