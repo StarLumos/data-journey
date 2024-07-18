@@ -7,7 +7,7 @@ def email():
     print("\nPreparing data...")
 
     phases = [
-        "application layer -- your email is being formatted using the Simple Mail Transfer Protocol", 
+        "application layer -- your email is being formatted using the Simple Mail Transfer Protocol",
         "transport layer -- your email is being segmented and encapsulated with TCP headers",
         "network layer -- each segment is becoming a packet and being encapsulated in headers that includes the source and destination IP addresses",
         "data link layer -- each packet is being encapsulated in frames that include the MAC address",
@@ -17,15 +17,15 @@ def email():
         "data handling -- the email is being stored on the mail server",
         "display"
     ]
-    
+
     for i in range(len(phases)):
-        start("Entering phase " + i + phases[i])
+        start("Entering phase " + str(i) + phases[i])
 
         if phases[i] == "display":
             step("Retrieving email from the server")
             step("Reassembling the data")
             step("Displaying email")
-        
+
         completion(i)
 
     print("\nThe recipient has now received this message:")
