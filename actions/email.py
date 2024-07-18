@@ -7,7 +7,11 @@ def email():
     print("\nPreparing data...")
 
     phases = [
+<<<<<<< HEAD
         "application layer -- your email is being formatted using the Simple Mail Transfer Protocol",
+=======
+        "application layer -- your email is being formatted using the Simple Mail Transfer Protocol", 
+>>>>>>> 3e83927 (:bulb: `refactor` `main.py`, `email.py` to be more readable)
         "transport layer -- your email is being segmented and encapsulated with TCP headers",
         "network layer -- each segment is becoming a packet and being encapsulated in headers that includes the source and destination IP addresses",
         "data link layer -- each packet is being encapsulated in frames that include the MAC address",
@@ -16,6 +20,7 @@ def email():
         "data reception -- the mail server is processing the frames, processes the packets, and reassembles the data packets",
         "data handling -- the email is being stored on the mail server",
         "display"
+<<<<<<< HEAD
     ]
 
     for i in range(len(phases)):
@@ -26,6 +31,18 @@ def email():
             step("Reassembling the data")
             step("Displaying email")
 
+=======
+        ]
+    
+    for i in range(len(phases)):
+        start("Entering phase " + i + phases[i])
+
+        if phases[i] == "display":
+            step("Retrieving email from the server")
+            step("Reassembling the data")
+            step("Displaying email")
+        
+>>>>>>> 3e83927 (:bulb: `refactor` `main.py`, `email.py` to be more readable)
         completion(i)
 
     print("\nThe recipient has now received this message:")
