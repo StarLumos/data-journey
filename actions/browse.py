@@ -1,10 +1,11 @@
 from utilities import start, step, completion
 import time
 
-def website() -> str | None:
-    global site
-
-    print("\nWhich website would you like to visit? \n 1. Gmail \n 2. YouTube \n 3. Spotify")
+def website() -> str:
+    print("\n".join(["\nWhich website would you like to visit?",
+        "1. Gmail",
+        "2. YouTube",
+        "3. Spotify"]))
     choice = input("\nEnter your choice: ")
 
     if not choice.isdigit():
@@ -13,17 +14,17 @@ def website() -> str | None:
     choice = int(choice)
 
     if choice == 1:
-        site = "Gmail"
+        return "Gmail"
     elif choice == 2:
-        site = "YouTube"
+        return "YouTube"
     elif choice == 3:
-        site = "Spotify"
+        return "Spotify"
     else:
         print("Sorry, that isn't an option. Please try again.")
-        website()
+        return website()
 
 def browse():
-    website()
+    site = website()
 
     phases = [
         "Domain Name System (DNS) lookup",
@@ -35,35 +36,53 @@ def browse():
         "page rendering"
     ]
 
-    for i in range(len(phases)):
-        start("Entering phase " + str(i) + phases[i])
+    for i, phase in enumerate(phases):
+        start("Entering phase " + str(i) + phase)
+        steps: list[str]
 
-        if i == 1:
-            step("Checking browser cache")
-            step("Checking Operating System cache")
-            step("Querying the configured DNS server")
-            step("Performing recursive queries to find the authoritative DNS server for the domain")
-            step("Returning the IP address of the webs erver hosting the website")
-        elif i == 2:
-            step("SYN - the client is sending a SYN (synchronize) packet to the server")
-            step("SYN-ACK - the server is responding with a SYN-ACK (synchronize-acknowledge) packet")
-            step("ACK - the client is sending an ACK (acknowledge) packet back to the server")
-        elif i == 4:
-            step("Processing the HTTP request")
-            step("Retrieving the requested resource (e.g. HTML file)")
-            step("Preparing an HTTP response")
-        elif i == 5:
-            step("Server is sending the HTTP response back to the browser")
-            step("Breaking down response data into smaller packets for internet transmission")
-        elif i == 6:
-            step("Receiving the data packets and reassembling into a complete HTTP response")
-            step("Parsing the HTML file and processing the document structure and elements")
-            step("Identifying additional resources needed (CSS, JavaScript, images) and sending HTTP requests to the server for each of the needed resources")
-        elif i == 7:
-            step("Processing CSS")
-            step("Executing JavaScript")
-            step("Constructing the Document Object Model and rendering the visual representation of the web page on the screen")
+        match i:
+            case 1:
+                steps = [
+                    "Checking browser cache",
+                    "Checking Operating System cache",
+                    "Querying the configured DNS server",
+                    "Performing recursive queries to find the authoritative DNS server for the domain",
+                    "Returning the IP address of the webs erver hosting the website"
+                ]
+            case 2:
+                steps = [
+                    "SYN - the client is sending a SYN (synchronize) packet to the server",
+                    "SYN-ACK - the server is responding with a SYN-ACK (synchronize-acknowledge) packet",
+                    "ACK - the client is sending an ACK (acknowledge) packet back to the server"
+                ]
+            case 4:
+                steps = [
+                    "Processing the HTTP request",
+                    "Retrieving the requested resource (e.g. HTML file)",
+                    "Preparing an HTTP response"
+                ]
+            case 5:
+                steps = [
+                    "Server is sending the HTTP response back to the browser",
+                    "Breaking down response data into smaller packets for internet transmission"
+                ]
+            case 6:
+                steps = [
+                    "Receiving the data packets and reassembling into a complete HTTP response",
+                    "Parsing the HTML file and processing the document structure and elements",
+                    "Identifying additional resources needed (CSS, JavaScript, images) and sending HTTP requests to the server for each of the needed resources"
+                ]
+            case 7:
+                steps = [
+                    "Processing CSS",
+                    "Executing JavaScript",
+                    "Constructing the Document Object Model and rendering the visual representation of the web page on the screen"
+                ]
+            case _:
+                raise ValueError()
 
+        for it in steps:
+            step(it)
         completion(i)
 
     print("\nNow opening " + site)
