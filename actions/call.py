@@ -1,10 +1,11 @@
 from utilities import start, step, completion
 import time
 
-def recipient() -> str | None:
-    global person
-
-    print("\nWho would you like to call? \n 1. Doctor Strange \n 2. Shang-Chi \n 3. Captain Marvel")
+def recipient() -> str:
+    print("\n".join(["\nWho would you like to call?",
+        "1. Doctor Strange",
+        "2. Shang-Chi",
+        "3. Captain Marvel"]))
     choice = input("\nEnter your choice: ")
 
     if not choice.isdigit():
@@ -13,20 +14,17 @@ def recipient() -> str | None:
     choice = int(choice)
 
     if choice == 1:
-        person = "Doctor Strange"
-        return
+        return "Doctor Strange"
     elif choice == 2:
-        person = "Shang-chi"
-        return
+        return "Shang-chi"
     elif choice == 3:
-        person = "Captain Marvel"
-        return
+        return "Captain Marvel"
     else:
         print("Sorry, that isn't an option. Please try again.")
-        recipient()
+        return recipient()
 
 def call():
-    recipient()
+    person = recipient()
 
     phases = [
         "call initiation",
@@ -40,24 +38,39 @@ def call():
 
     for i in range(len(phases)):
         start("Entering phase " + str(i) + phases[i])
+        steps = []
 
-        if i == 1:
-            step("Generating a call setup request")
-        elif i == 2:
-            step("Converting the call setup request into radio frequency (RF) signals")
-            step("Transmitting to the nearest cell tower")
-        elif i == 3:
-            step("Nearest cell tower receiving RF signals and converting them into digital data")
-            step("Forwaring the call setup request to the nearest mobile switching center (MSC)")
-        elif i == 4:
-            step("MSC processing the call request")
-            step("Identifying the destination number")
-            step("Determining the best route to the recipient's phone")
-            step("MSC sending a setup request to the recipient's nearest MSC to identify the nearest cell tower to them")
-        elif i == 7:
-            step("Recipient's phone receiving the RF signals")
-            step("Converting back to digital data")
-            step("Triggering the ringtone to notify the recipient of the incoming call")
+        match i:
+            case 1:
+                steps = ["Generating a call setup request"]
+            case 2:
+                steps = [
+                    "Converting the call setup request into radio frequency (RF) signals",
+                    "Transmitting to the nearest cell tower"
+                ]
+            case 3:
+                steps = [
+                    "Nearest cell tower receiving RF signals and converting them into digital data",
+                    "Forwaring the call setup request to the nearest mobile switching center (MSC)"
+                ]
+            case 4:
+                steps = [
+                    "MSC processing the call request",
+                    "Identifying the destination number",
+                    "Determining the best route to the recipient's phone",
+                    "MSC sending a setup request to the recipient's nearest MSC to identify the nearest cell tower to them"
+                ]
+            case 7:
+                steps = [
+                    "Recipient's phone receiving the RF signals",
+                    "Converting back to digital data",
+                    "Triggering the ringtone to notify the recipient of the incoming call"
+                ]
+            case _:
+                raise ValueError()
+
+        for it in steps:
+            step(it)
 
         completion(i)
 
