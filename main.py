@@ -3,14 +3,19 @@ from actions.browse import browse
 from actions.call import call
 
 def choice():
-    print("\nWhat would you like to do? \n 1. Send an email \n 2. Dial a call \n 3. Visit a website")
+    print("\n".join([
+        "\nWhat would you like to do?",
+        "1. Send an email",
+        "2. Dial a call",
+        "3. Visit a website"
+    ]))
     initial = input("\nEnter the corresponding number: ")
 
     if not initial.isdigit():
         print("Sorry, that isn't an option. Please try again.")
         return choice()
     initial = int(initial)
-     
+
     if initial == 1:
         email()
     elif initial == 2:
